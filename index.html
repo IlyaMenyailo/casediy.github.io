@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CASEDIY</title>
 
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111880917', 'ym');
+    ym(111880917, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111880917" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=PT+Sans:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -115,7 +128,7 @@
   .logo {
     font-family: 'Unbounded', sans-serif;
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 1.28rem;
     letter-spacing: -0.01em;
     display: flex;
     align-items: center;
@@ -124,8 +137,8 @@
   }
 
   .logo-mark {
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
     flex: none;
   }
 
@@ -207,6 +220,9 @@
   .btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
   .btn-ghost:hover { border-color: var(--accent); }
 
+  .btn-lg { padding: 18px 34px; font-size: 1.08rem; }
+  .btn-sm { padding: 10px 20px; font-size: 0.86rem; }
+
   .hero-stack {
     position: relative;
     height: 380px;
@@ -273,6 +289,48 @@
   .section-head h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-top: 10px; }
   .section-head p { color: var(--ink-soft); margin-top: 14px; font-size: 1.02rem; }
 
+  /* ---------- order path (order online vs kiosk) ---------- */
+
+  .path-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .path-card {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 30px 28px 32px;
+  }
+
+  .path-card .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink-soft);
+  }
+
+  .path-card.is-live .badge { background: var(--accent); color: var(--accent-ink); }
+
+  .path-card h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.18rem;
+    margin-top: 16px;
+  }
+
+  .path-card p { color: var(--ink-soft); margin-top: 10px; font-size: 0.96rem; }
+
+  .path-card .btn { margin-top: 20px; }
+
+  @media (max-width: 900px) {
+    .path-grid { grid-template-columns: 1fr; }
+  }
+
   /* ---------- how it works ---------- */
 
   .steps {
@@ -306,7 +364,7 @@
 
   @media (max-width: 900px) {
     .steps { grid-template-columns: 1fr 1fr; }
-    #how .section-head { margin-top: 75px; }
+    #order-path .section-head { margin-top: 100px; }
   }
   @media (max-width: 560px) {
     .steps { grid-template-columns: 1fr; }
@@ -516,12 +574,12 @@
         <em data-i18n="hero_title_2">на чехле за 3 минуты</em>
       </h1>
       <p class="lede" data-i18n="hero_lede">
-        Сканируешь QR-код на автомате, загружаешь и оформляешь фото прямо на телефоне,
-        оплачиваешь — и автомат сам печатает и выдаёт готовый чехол. Без ожидания курьера.
+        Чехол с твоим фото на любую модель телефона: оформи заказ с доставкой
+        или напечатай сам в торговом центре за 3 минуты — выбирай, как удобнее.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#locations" data-i18n="hero_cta_primary">Найти автомат рядом</a>
-        <a class="btn btn-ghost" href="#how" data-i18n="hero_cta_secondary">Как это работает</a>
+        <a class="btn btn-primary btn-lg" href="#order-path" data-i18n="hero_cta_primary">Заказать чехол</a>
+        <a class="btn btn-ghost btn-sm" href="#locations" data-i18n="hero_cta_secondary">Найти автомат рядом</a>
       </div>
     </div>
     <div class="hero-stack" aria-hidden="true">
@@ -535,6 +593,28 @@
           <rect x="3" y="14" width="7" height="7" rx="1"></rect>
           <path d="M14 14h3v3h-3zM20 14h1v1h-1zM14 20h1v1h-1zM20 20h1v1h-1zM17 17h1v1h-1z"></path>
         </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="order-path" class="wrap">
+    <div class="section-head">
+      <p class="label" data-i18n="path_eyebrow">Способ получения</p>
+      <h2 data-i18n="path_title">Как оформить чехол</h2>
+      <p data-i18n="path_lede">Выберите то, что удобнее: оформить заказ онлайн заранее или напечатать чехол прямо сейчас в торговом центре.</p>
+    </div>
+    <div class="path-grid">
+      <div class="path-card">
+        <span class="badge" data-i18n="path_online_badge">Скоро</span>
+        <h3 data-i18n="path_online_title">Заказать онлайн</h3>
+        <p data-i18n="path_online_text">Мы готовим конструктор: выбираешь модель телефона и фото, оформляешь оплату и доставку — чехол привезут курьером. Оставьте контакт, и мы напишем, как только запустимся.</p>
+        <a class="btn btn-ghost" href="#contact" data-i18n="path_online_cta">Узнать первым</a>
+      </div>
+      <div class="path-card is-live">
+        <span class="badge" data-i18n="path_kiosk_badge">Доступно уже сейчас</span>
+        <h3 data-i18n="path_kiosk_title">Купить в автомате</h3>
+        <p data-i18n="path_kiosk_text">Автоматы уже стоят в торговых центрах Санкт-Петербурга — печать займёт около 3 минут, чехол получите сразу на месте.</p>
+        <a class="btn btn-primary" href="#locations" data-i18n="path_kiosk_cta">Найти автомат</a>
       </div>
     </div>
   </section>
@@ -719,11 +799,32 @@
       hero_title_1: ["Твоё фото —", "Your photo —"],
       hero_title_2: ["на чехле за 3 минуты", "on a case in 3 minutes"],
       hero_lede: [
-        "Сканируешь QR-код на автомате, загружаешь и оформляешь фото прямо на телефоне, оплачиваешь — и автомат сам печатает и выдаёт готовый чехол. Без ожидания курьера.",
-        "Scan the QR code on the kiosk, upload and arrange your photo right on your phone, pay — and the kiosk prints and dispenses the finished case on the spot. No courier, no waiting."
+        "Чехол с твоим фото на любую модель телефона: оформи заказ с доставкой или напечатай сам в торговом центре за 3 минуты — выбирай, как удобнее.",
+        "A phone case with your photo, for any model: order it with delivery, or print it yourself at the mall in 3 minutes — whichever suits you."
       ],
-      hero_cta_primary: ["Найти автомат рядом", "Find a kiosk nearby"],
-      hero_cta_secondary: ["Как это работает", "How it works"],
+      hero_cta_primary: ["Заказать чехол", "Order a case"],
+      hero_cta_secondary: ["Найти автомат рядом", "Find a kiosk nearby"],
+
+      path_eyebrow: ["Способ получения", "How to get it"],
+      path_title: ["Как оформить чехол", "Two ways to get your case"],
+      path_lede: [
+        "Выберите то, что удобнее: оформить заказ онлайн заранее или напечатать чехол прямо сейчас в торговом центре.",
+        "Pick whatever's easier — order online ahead of time, or print your case right now at the mall."
+      ],
+      path_online_badge: ["Скоро", "Coming soon"],
+      path_online_title: ["Заказать онлайн", "Order online"],
+      path_online_text: [
+        "Мы готовим конструктор: выбираешь модель телефона и фото, оформляешь оплату и доставку — чехол привезут курьером. Оставьте контакт, и мы напишем, как только запустимся.",
+        "We're building an online constructor — pick your phone model and photo, arrange payment and delivery, and a courier brings the case to you. Leave your contact and we'll reach out the moment it launches."
+      ],
+      path_online_cta: ["Узнать первым", "Get notified first"],
+      path_kiosk_badge: ["Доступно уже сейчас", "Available now"],
+      path_kiosk_title: ["Купить в автомате", "Buy at a kiosk"],
+      path_kiosk_text: [
+        "Автоматы уже стоят в торговых центрах Санкт-Петербурга — печать займёт около 3 минут, чехол получите сразу на месте.",
+        "Kiosks are already installed in St. Petersburg malls — printing takes about 3 minutes and you get your case on the spot."
+      ],
+      path_kiosk_cta: ["Найти автомат", "Find a kiosk"],
 
       how_eyebrow: ["Процесс", "Process"],
       how_title: ["От фото до чехла — четыре шага", "From photo to case in four steps"],
