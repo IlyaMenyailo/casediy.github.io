@@ -528,6 +528,11 @@
   }
 
   .teaser .label { color: var(--accent); }
+  html, body { overflow-x: clip; }
+  .teaser .btn { margin-top: 22px; }
+  .teaser.is-live { border-style: solid; border-color: var(--accent); }
+  .nav-order, .theme-toggle, .lang-toggle { white-space: nowrap; }
+  @media (max-width: 420px) { .nav-order { padding: 8px 14px; font-size: 0.8rem; } .nav-right { gap: 6px; } }
   .teaser p { color: var(--ink-soft); margin-top: 12px; font-size: 0.96rem; }
 
   @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
@@ -566,6 +571,7 @@
       <a href="#contact" data-i18n="nav_contact">Контакты</a>
     </nav>
     <div class="nav-right">
+      <a class="btn btn-primary btn-sm nav-order js-order" href="https://order.casediy.ru/order" data-i18n="nav_order">Заказать</a>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">☀︎/☾</button>
       <button class="lang-toggle" id="langToggle" type="button">EN</button>
     </div>
@@ -585,7 +591,7 @@
         или напечатай сам в торговом центре за 3 минуты — выбирай, как удобнее.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="#order-path" data-i18n="hero_cta_primary">Заказать чехол</a>
+        <a class="btn btn-primary btn-lg js-order" href="https://order.casediy.ru/order" data-i18n="hero_cta_primary">Заказать чехол</a>
         <a class="btn btn-ghost btn-sm" href="#locations" data-i18n="hero_cta_secondary">Найти автомат рядом</a>
       </div>
     </div>
@@ -611,14 +617,14 @@
       <p data-i18n="path_lede">Выберите то, что удобнее: оформить заказ онлайн заранее или напечатать чехол прямо сейчас в торговом центре.</p>
     </div>
     <div class="path-grid">
-      <div class="path-card">
-        <span class="badge" data-i18n="path_online_badge">Скоро</span>
+      <div class="path-card is-live">
+        <span class="badge" data-i18n="path_online_badge">С доставкой</span>
         <h3 data-i18n="path_online_title">Заказать онлайн</h3>
-        <p data-i18n="path_online_text">Мы готовим конструктор: выбираешь модель телефона и фото, оформляешь оплату и доставку — чехол привезут курьером. Оставьте контакт, и мы напишем, как только запустимся.</p>
-        <a class="btn btn-ghost" href="#contact" data-i18n="path_online_cta">Узнать первым</a>
+        <p data-i18n="path_online_text">Выбери модель телефона и тип чехла, загрузи фото и посмотри, как он будет выглядеть. Оплати онлайн и укажи адрес — готовый чехол отправим тебе по почте.</p>
+        <a class="btn btn-primary js-order" href="https://order.casediy.ru/order" data-i18n="path_online_cta">Заказать онлайн</a>
       </div>
       <div class="path-card is-live">
-        <span class="badge" data-i18n="path_kiosk_badge">Доступно уже сейчас</span>
+        <span class="badge" data-i18n="path_kiosk_badge">За 3 минуты</span>
         <h3 data-i18n="path_kiosk_title">Купить в автомате</h3>
         <p data-i18n="path_kiosk_text">Автоматы уже стоят в торговых центрах Санкт-Петербурга — печать займёт около 3 минут, чехол получите сразу на месте.</p>
         <a class="btn btn-primary" href="#locations" data-i18n="path_kiosk_cta">Найти автомат</a>
@@ -767,14 +773,14 @@
           </a>
         </div>
       </div>
-      <div class="teaser">
-        <p class="label" data-i18n="teaser_eyebrow">Скоро</p>
-        <h3 style="margin-top:10px; font-family:'Unbounded',sans-serif; font-size:1.15rem;" data-i18n="teaser_title">Заказ чехла онлайн</h3>
+      <div class="teaser is-live">
+        <p class="label" data-i18n="teaser_eyebrow">Онлайн-заказ</p>
+        <h3 style="margin-top:10px; font-family:'Unbounded',sans-serif; font-size:1.15rem;" data-i18n="teaser_title">Закажите чехол онлайн</h3>
         <p data-i18n="teaser_text">
-          Мы готовим онлайн-конструктор: выбираешь модель телефона, загружаешь фото,
-          оформляешь доставку и оплату — без похода к автомату. Кнопка появится здесь,
-          как только конструктор будет готов.
+          Не нужно идти к автомату: выберите модель телефона, загрузите фото,
+          оплатите заказ — и мы отправим готовый чехол по указанному адресу.
         </p>
+        <a class="btn btn-primary js-order" href="https://order.casediy.ru/order" data-i18n="teaser_cta">Оформить заказ</a>
       </div>
     </div>
   </section>
@@ -786,6 +792,10 @@
 </footer>
 
 <script>
+  // ===== Адрес страницы заказа (конструктора). Поменяйте здесь — обновятся все кнопки «Заказать». =====
+  var ORDER_URL = 'https://order.casediy.ru/order';
+  document.querySelectorAll('.js-order').forEach(function (a) { a.setAttribute('href', ORDER_URL); });
+
   (function () {
     var root = document.documentElement;
     var themeBtn = document.getElementById('themeToggle');
@@ -802,6 +812,7 @@
       nav_assortment: ["Ассортимент", "Range"],
       nav_locations: ["Автоматы", "Locations"],
       nav_contact: ["Контакты", "Contact"],
+      nav_order: ["Заказать", "Order"],
 
       hero_eyebrow: ["Печать на чехлах для телефонов", "Photo printing on phone cases"],
       hero_title_1: ["Твоё фото —", "Your photo —"],
@@ -819,14 +830,14 @@
         "Выберите то, что удобнее: оформить заказ онлайн заранее или напечатать чехол прямо сейчас в торговом центре.",
         "Pick whatever's easier — order online ahead of time, or print your case right now at the mall."
       ],
-      path_online_badge: ["Скоро", "Coming soon"],
+      path_online_badge: ["С доставкой", "With delivery"],
       path_online_title: ["Заказать онлайн", "Order online"],
       path_online_text: [
-        "Мы готовим конструктор: выбираешь модель телефона и фото, оформляешь оплату и доставку — чехол привезут курьером. Оставьте контакт, и мы напишем, как только запустимся.",
-        "We're building an online constructor — pick your phone model and photo, arrange payment and delivery, and a courier brings the case to you. Leave your contact and we'll reach out the moment it launches."
+        "Выбери модель телефона и тип чехла, загрузи фото и посмотри, как он будет выглядеть. Оплати онлайн и укажи адрес — готовый чехол отправим тебе по почте.",
+        "Pick your phone model and case type, upload a photo and preview how it will look. Pay online, enter your address — and we'll mail the finished case to you."
       ],
-      path_online_cta: ["Узнать первым", "Get notified first"],
-      path_kiosk_badge: ["Доступно уже сейчас", "Available now"],
+      path_online_cta: ["Заказать онлайн", "Order online"],
+      path_kiosk_badge: ["За 3 минуты", "In 3 minutes"],
       path_kiosk_title: ["Купить в автомате", "Buy at a kiosk"],
       path_kiosk_text: [
         "Автоматы уже стоят в торговых центрах Санкт-Петербурга — печать займёт около 3 минут, чехол получите сразу на месте.",
@@ -900,12 +911,13 @@
       contact_max: ["MAX: +7 (913) 103-05-27", "MAX: +7 (913) 103-05-27"],
       contact_ig: ["@casediy.spb", "@casediy.spb"],
 
-      teaser_eyebrow: ["Скоро", "Coming soon"],
-      teaser_title: ["Заказ чехла онлайн", "Order a case online"],
+      teaser_eyebrow: ["Онлайн-заказ", "Online order"],
+      teaser_title: ["Закажите чехол онлайн", "Order your case online"],
       teaser_text: [
-        "Мы готовим онлайн-конструктор: выбираешь модель телефона, загружаешь фото, оформляешь доставку и оплату — без похода к автомату. Кнопка появится здесь, как только конструктор будет готов.",
-        "We're building an online configurator: pick your phone model, upload a photo, arrange delivery and payment — no trip to the kiosk needed. A button will appear here once it's ready."
+        "Не нужно идти к автомату: выберите модель телефона, загрузите фото, оплатите заказ — и мы отправим готовый чехол по указанному адресу.",
+        "No need to visit a kiosk: choose your phone model, upload a photo, pay for the order — and we'll ship the finished case to your address."
       ],
+      teaser_cta: ["Оформить заказ", "Place an order"],
 
       footer_text: ["© 2026 CASEDIY · Печать фото на чехлах", "© 2026 CASEDIY · Photo printing on phone cases"]
     };
